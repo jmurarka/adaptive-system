@@ -1,0 +1,351 @@
+.roadmap-container {
+  height: 100%;
+  overflow-y: auto;
+  padding: 20px;
+  background: linear-gradient(135deg, #0f172a 0%, #1a1f35 100%);
+}
+
+.roadmap-spinner,
+.roadmap-error,
+.roadmap-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-size: 16px;
+  color: #94a3b8;
+  text-align: center;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.roadmap-error {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 12px;
+  padding: 24px;
+  color: #fca5a5;
+}
+
+.roadmap-empty {
+  background: rgba(107, 114, 128, 0.1);
+  border: 1px solid rgba(107, 114, 128, 0.3);
+  border-radius: 12px;
+  padding: 24px;
+}
+
+/* Header */
+.roadmap-header {
+  background: linear-gradient(
+    135deg,
+    rgba(30, 58, 95, 0.5) 0%,
+    rgba(45, 27, 105, 0.5) 100%
+  );
+  border: 1px solid rgba(167, 139, 250, 0.2);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 32px;
+}
+
+.roadmap-title-section {
+  flex: 1;
+}
+
+.roadmap-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+  color: #e0e7ff;
+}
+
+.roadmap-subtitle {
+  margin: 0;
+  color: #94a3b8;
+  font-size: 14px;
+}
+
+/* Progress section */
+.roadmap-progress-section {
+  flex: 1;
+  min-width: 300px;
+}
+
+.progress-stats {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 16px;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stat-value {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.progress-bar-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.progress-bar {
+  flex: 1;
+  height: 8px;
+  background: rgba(107, 114, 128, 0.2);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.progress-percentage {
+  font-size: 14px;
+  font-weight: 700;
+  color: #06b6d4;
+  min-width: 40px;
+  text-align: right;
+}
+
+/* Flowchart */
+.roadmap-flowchart {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  margin-bottom: 32px;
+}
+
+.roadmap-tier {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tier-label {
+  font-size: 14px;
+  font-weight: 700;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0 12px;
+}
+
+.tier-concepts {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+/* Concept nodes */
+.concept-node {
+  position: relative;
+  padding: 16px;
+  border: 2px solid;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(10px);
+}
+
+.concept-node:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+  border-width: 2px;
+}
+
+.concept-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.concept-status-icon {
+  font-size: 18px;
+  font-weight: 700;
+  min-width: 24px;
+  text-align: center;
+}
+
+.concept-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #e0e7ff;
+  word-break: break-word;
+}
+
+/* Status variants */
+.concept-node.mastered {
+  border-color: #10b981;
+}
+
+.concept-node.mastered .concept-name {
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+
+.concept-node.in_progress {
+  border-color: #f59e0b;
+  animation: pulse-border 2s ease-in-out infinite;
+}
+
+.concept-node.weak {
+  border-color: #ef4444;
+}
+
+.concept-node.not_started {
+  border-color: #6b7280;
+  opacity: 0.7;
+}
+
+@keyframes pulse-border {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(245, 158, 11, 0);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(245, 158, 11, 0.1);
+  }
+}
+
+/* Tooltip */
+.concept-tooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-8px);
+  background: rgba(15, 23, 42, 0.95);
+  border: 1px solid rgba(167, 139, 250, 0.3);
+  border-radius: 8px;
+  padding: 12px;
+  min-width: 180px;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+}
+
+.tooltip-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+  font-size: 12px;
+}
+
+.tooltip-label {
+  color: #94a3b8;
+  font-weight: 600;
+}
+
+.tooltip-value {
+  color: #e0e7ff;
+  font-weight: 700;
+}
+
+.tooltip-status {
+  text-align: center;
+  font-size: 13px;
+  font-weight: 700;
+  margin: 8px 0;
+  padding: 6px 0;
+  border-radius: 4px;
+  background: rgba(100, 100, 100, 0.1);
+}
+
+.tooltip-button {
+  width: 100%;
+  margin-top: 8px;
+  padding: 6px 12px;
+  background: rgba(99, 102, 241, 0.2);
+  border: 1px solid rgba(99, 102, 241, 0.5);
+  border-radius: 6px;
+  color: #a5f3fc;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tooltip-button:hover {
+  background: rgba(99, 102, 241, 0.3);
+  border-color: rgba(99, 102, 241, 0.8);
+}
+
+/* Goals section */
+.roadmap-goals {
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 24px;
+}
+
+.goals-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #bfdbfe;
+  margin: 0 0 12px 0;
+}
+
+.goals-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.goal-item {
+  display: inline-block;
+  padding: 6px 12px;
+  background: rgba(59, 130, 246, 0.2);
+  border: 1px solid rgba(59, 130, 246, 0.4);
+  border-radius: 6px;
+  font-size: 12px;
+  color: #bfdbfe;
+  font-weight: 600;
+}
+
+.goal-item.more {
+  background: rgba(107, 114, 128, 0.1);
+  border-color: rgba(107, 114, 128, 0.3);
+  color: #94a3b8;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .roadmap-header {
+    flex-direction: column;
+  }
+
+  .tier-concepts {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+
+  .progress-stats {
+    gap: 16px;
+  }
+
+  .roadmap-container {
+    padding: 12px;
+  }
+}

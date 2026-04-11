@@ -1,0 +1,145 @@
+{
+  "domain": "Data Structures & Algorithms",
+  "concepts": {
+    "variables": {
+      "id": "variables", "name": "Variables & Data Types",
+      "description": "Fundamental units of storage: integers, floats, strings, booleans. Covers declaration, assignment, and type coercion.",
+      "prerequisites": [], "difficulty": "beginner", "effort_hours": 2,
+      "resources": ["https://docs.python.org/3/library/stdtypes.html"],
+      "canonical_position": 1
+    },
+    "arrays": {
+      "id": "arrays", "name": "Arrays",
+      "description": "Contiguous memory blocks storing homogeneous elements, supporting O(1) random access and O(n) insertion/deletion.",
+      "prerequisites": ["variables"], "difficulty": "beginner", "effort_hours": 3,
+      "resources": ["https://en.wikipedia.org/wiki/Array_data_structure"],
+      "canonical_position": 2
+    },
+    "strings": {
+      "id": "strings", "name": "Strings & String Manipulation",
+      "description": "Immutable sequences of characters; sliding window, two-pointer, and hashing techniques for string problems.",
+      "prerequisites": ["arrays"], "difficulty": "beginner", "effort_hours": 3,
+      "resources": [],
+      "canonical_position": 3
+    },
+    "hash_tables": {
+      "id": "hash_tables", "name": "Hash Tables",
+      "description": "Key-value store using a hash function for O(1) average lookup, insert, and delete. Collision resolution strategies.",
+      "prerequisites": ["arrays"], "difficulty": "intermediate", "effort_hours": 4,
+      "resources": [],
+      "canonical_position": 4
+    },
+    "sorting": {
+      "id": "sorting", "name": "Sorting Algorithms",
+      "description": "Bubble, selection, insertion (O(n²)); merge sort, quicksort, heapsort (O(n log n)); counting/radix sort (O(n+k)).",
+      "prerequisites": ["arrays"], "difficulty": "beginner", "effort_hours": 5,
+      "resources": [],
+      "canonical_position": 5
+    },
+    "binary_search": {
+      "id": "binary_search", "name": "Binary Search",
+      "description": "O(log n) search on sorted arrays; template variations for lower-bound, upper-bound, and search in rotated arrays.",
+      "prerequisites": ["arrays", "sorting"], "difficulty": "intermediate", "effort_hours": 3,
+      "resources": [],
+      "canonical_position": 6
+    },
+    "recursion": {
+      "id": "recursion", "name": "Recursion",
+      "description": "A function calling itself with a smaller subproblem; base cases, call stack, and tail recursion optimization.",
+      "prerequisites": ["variables"], "difficulty": "intermediate", "effort_hours": 4,
+      "resources": [],
+      "canonical_position": 7
+    },
+    "linked_lists": {
+      "id": "linked_lists", "name": "Linked Lists",
+      "description": "Singly and doubly linked nodes with pointer manipulation; reversal, cycle detection (Floyd's algorithm), and merging.",
+      "prerequisites": ["arrays"], "difficulty": "intermediate", "effort_hours": 4,
+      "resources": [],
+      "canonical_position": 8
+    },
+    "stacks_queues": {
+      "id": "stacks_queues", "name": "Stacks & Queues",
+      "description": "LIFO and FIFO abstractions; applications in expression parsing, BFS, monotonic stack problems.",
+      "prerequisites": ["arrays", "linked_lists"], "difficulty": "intermediate", "effort_hours": 3,
+      "resources": [],
+      "canonical_position": 9
+    },
+    "trees": {
+      "id": "trees", "name": "Trees & Binary Trees",
+      "description": "Hierarchical structures; DFS traversals (pre/in/post-order), BFS level-order, height, diameter, LCA.",
+      "prerequisites": ["recursion", "linked_lists"], "difficulty": "intermediate", "effort_hours": 5,
+      "resources": [],
+      "canonical_position": 10
+    },
+    "bst": {
+      "id": "bst", "name": "Binary Search Trees",
+      "description": "Trees maintaining BST property; search, insert, delete in O(h); AVL and Red-Black tree balancing concepts.",
+      "prerequisites": ["trees", "binary_search"], "difficulty": "intermediate", "effort_hours": 4,
+      "resources": [],
+      "canonical_position": 11
+    },
+    "heaps": {
+      "id": "heaps", "name": "Heaps & Priority Queues",
+      "description": "Max-heap and min-heap; heapify O(n), extract-min O(log n); applications in k-th largest, Dijkstra, median streams.",
+      "prerequisites": ["trees"], "difficulty": "intermediate", "effort_hours": 4,
+      "resources": [],
+      "canonical_position": 12
+    },
+    "tries": {
+      "id": "tries", "name": "Tries (Prefix Trees)",
+      "description": "Character-indexed tree for prefix matching; O(L) insert and search; applications in autocomplete and IP routing.",
+      "prerequisites": ["trees", "hash_tables"], "difficulty": "advanced", "effort_hours": 4,
+      "resources": [],
+      "canonical_position": 13
+    },
+    "graphs": {
+      "id": "graphs", "name": "Graphs: Representation & Traversal",
+      "description": "Adjacency list/matrix; BFS (shortest path in unweighted), DFS (connected components, topological sort).",
+      "prerequisites": ["stacks_queues", "hash_tables"], "difficulty": "intermediate", "effort_hours": 6,
+      "resources": [],
+      "canonical_position": 14
+    },
+    "backtracking": {
+      "id": "backtracking", "name": "Backtracking",
+      "description": "Systematic exhaustive search with pruning; N-queens, permutations, subsets, Sudoku solver.",
+      "prerequisites": ["recursion"], "difficulty": "advanced", "effort_hours": 5,
+      "resources": [],
+      "canonical_position": 15
+    },
+    "dynamic_programming_1d": {
+      "id": "dynamic_programming_1d", "name": "Dynamic Programming (1D)",
+      "description": "Memoization and tabulation for 1D state spaces; Fibonacci, climbing stairs, house robber, coin change.",
+      "prerequisites": ["recursion", "arrays"], "difficulty": "advanced", "effort_hours": 6,
+      "resources": [],
+      "canonical_position": 16
+    },
+    "dynamic_programming_2d": {
+      "id": "dynamic_programming_2d", "name": "Dynamic Programming (2D)",
+      "description": "Grid DP, LCS, LIS, edit distance, knapsack; state transition on 2D tables.",
+      "prerequisites": ["dynamic_programming_1d"], "difficulty": "advanced", "effort_hours": 7,
+      "resources": [],
+      "canonical_position": 17
+    },
+    "graph_algorithms": {
+      "id": "graph_algorithms", "name": "Graph Algorithms",
+      "description": "Dijkstra (SSSP), Bellman-Ford, Floyd-Warshall, Prim/Kruskal MST, Union-Find, cycle detection.",
+      "prerequisites": ["graphs", "heaps"], "difficulty": "advanced", "effort_hours": 8,
+      "resources": [],
+      "canonical_position": 18
+    },
+    "sliding_window": {
+      "id": "sliding_window", "name": "Sliding Window & Two Pointers",
+      "description": "Linear-time patterns for subarray/substring problems; fixed and variable window, fast-slow pointers.",
+      "prerequisites": ["arrays", "strings"], "difficulty": "intermediate", "effort_hours": 3,
+      "resources": [],
+      "canonical_position": 19
+    },
+    "bit_manipulation": {
+      "id": "bit_manipulation", "name": "Bit Manipulation",
+      "description": "AND, OR, XOR, shifts; common tricks — power of two, single number, bit counting, bitmask DP.",
+      "prerequisites": ["variables"], "difficulty": "intermediate", "effort_hours": 3,
+      "resources": [],
+      "canonical_position": 20
+    }
+  }
+}
