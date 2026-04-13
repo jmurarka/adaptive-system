@@ -6,7 +6,6 @@ import json
 from pathlib import Path
 from typing import List, Dict, Optional, Set
 
-
 class CurriculumKG:
     def __init__(self, path: str = None):
         if path is None:

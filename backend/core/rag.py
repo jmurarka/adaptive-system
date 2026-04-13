@@ -59,7 +59,7 @@ class RAGExplainer:
         if not self._llm_ok:
             return self._template_explanation(concept, action, reason, mastery_score)
 
-        prompt = f"""You are an adaptive learning tutor. Explain in 2–3 clear sentences
+        prompt = f"""You are an adaptive learning tutor. Explain in 2-3 clear sentences
 why the learner's roadmap was updated.
 
 CONCEPT: {concept.get('name', concept_id)}
@@ -109,7 +109,7 @@ WEAK PREREQUISITES: {', '.join(prereq_names)}
 RETRIEVED EVIDENCE:
 {context}
 
-In 2–3 sentences, explain to the learner why these prerequisites matter
+In 2-3 sentences, explain to the learner why these prerequisites matter
 for understanding this concept. Be specific and constructive.
 Only use information from the evidence above."""
 
