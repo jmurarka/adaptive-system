@@ -1,157 +1,411 @@
 {
   "questions": {
+    "variables": [
+      {
+        "id": "var_1",
+        "level": "definitional",
+        "text": "What is a variable in programming?",
+        "expected_points": [
+          "stores data",
+          "named memory location",
+          "value can change"
+        ],
+        "rubric": {
+          "definition": "Defines variable correctly",
+          "reasoning": "Explains role in program",
+          "application": "Gives example"
+        }
+      },
+      {
+        "id": "var_2",
+        "level": "application",
+        "text": "What are common data types in programming languages?",
+        "expected_points": [
+          "int",
+          "float",
+          "string",
+          "boolean"
+        ],
+        "rubric": {
+          "definition": "Lists basic data types",
+          "reasoning": "Explains usage",
+          "application": "Gives examples"
+        }
+      }
+    ],
     "arrays": [
       {
-        "id": "arr_1", "level": "definitional",
+        "id": "arr_1",
+        "level": "definitional",
         "text": "What is an array and how is it stored in memory?",
-        "expected_points": ["contiguous memory", "fixed size", "indexed access", "O(1) lookup"],
-        "rubric": {"definition": "Describes contiguous memory layout", "reasoning": "Explains why O(1) access is possible", "application": "Mentions when arrays are preferred"}
+        "expected_points": [
+          "contiguous memory",
+          "fixed size",
+          "indexed access",
+          "O(1) lookup"
+        ],
+        "rubric": {
+          "definition": "Describes contiguous memory layout",
+          "reasoning": "Explains why O(1) access is possible",
+          "application": "Mentions when arrays are preferred"
+        }
       },
       {
-        "id": "arr_2", "level": "application",
+        "id": "arr_2",
+        "level": "application",
         "text": "Given an unsorted array, how would you find two numbers that sum to a target value? What is the time complexity of your approach?",
-        "expected_points": ["hash map approach", "O(n) time", "O(n) space", "two pointer on sorted"],
-        "rubric": {"definition": "Names a valid algorithm", "reasoning": "Justifies the complexity", "application": "Correctly describes the implementation"}
+        "expected_points": [
+          "hash map approach",
+          "O(n) time",
+          "O(n) space",
+          "two pointer on sorted"
+        ],
+        "rubric": {
+          "definition": "Names a valid algorithm",
+          "reasoning": "Justifies the complexity",
+          "application": "Correctly describes the implementation"
+        }
       },
       {
-        "id": "arr_3", "level": "synthesis",
+        "id": "arr_3",
+        "level": "synthesis",
         "text": "Compare arrays with linked lists. When would you choose one over the other?",
-        "expected_points": ["cache locality", "dynamic size", "insertion cost", "random access"],
-        "rubric": {"definition": "Lists key differences", "reasoning": "Explains the tradeoff", "application": "Gives concrete use-case examples"}
+        "expected_points": [
+          "cache locality",
+          "dynamic size",
+          "insertion cost",
+          "random access"
+        ],
+        "rubric": {
+          "definition": "Lists key differences",
+          "reasoning": "Explains the tradeoff",
+          "application": "Gives concrete use-case examples"
+        }
       }
     ],
     "sorting": [
       {
-        "id": "sort_1", "level": "definitional",
+        "id": "sort_1",
+        "level": "definitional",
         "text": "Explain the difference between comparison-based and non-comparison-based sorting algorithms.",
-        "expected_points": ["O(n log n) lower bound for comparison sorts", "counting sort", "radix sort", "linear time"],
-        "rubric": {"definition": "Correctly defines both categories", "reasoning": "States the theoretical lower bound", "application": "Names algorithms in each category"}
+        "expected_points": [
+          "O(n log n) lower bound for comparison sorts",
+          "counting sort",
+          "radix sort",
+          "linear time"
+        ],
+        "rubric": {
+          "definition": "Correctly defines both categories",
+          "reasoning": "States the theoretical lower bound",
+          "application": "Names algorithms in each category"
+        }
       },
       {
-        "id": "sort_2", "level": "application",
+        "id": "sort_2",
+        "level": "application",
         "text": "Walk me through merge sort on the array [5, 2, 4, 1, 3]. What makes it stable and what is its space complexity?",
-        "expected_points": ["divide and conquer", "O(n log n)", "O(n) auxiliary space", "stable because equal elements preserve order"],
-        "rubric": {"definition": "Correctly traces the algorithm", "reasoning": "Explains stability", "application": "States correct complexity"}
+        "expected_points": [
+          "divide and conquer",
+          "O(n log n)",
+          "O(n) auxiliary space",
+          "stable because equal elements preserve order"
+        ],
+        "rubric": {
+          "definition": "Correctly traces the algorithm",
+          "reasoning": "Explains stability",
+          "application": "States correct complexity"
+        }
       },
       {
-        "id": "sort_3", "level": "synthesis",
+        "id": "sort_3",
+        "level": "synthesis",
         "text": "Why does quicksort have O(n²) worst-case complexity, and how do real-world implementations mitigate this?",
-        "expected_points": ["pivot selection", "already sorted input", "random pivot", "median of three", "introsort"],
-        "rubric": {"definition": "Identifies the degenerate case", "reasoning": "Explains pivot impact", "application": "Describes practical mitigation"}
+        "expected_points": [
+          "pivot selection",
+          "already sorted input",
+          "random pivot",
+          "median of three",
+          "introsort"
+        ],
+        "rubric": {
+          "definition": "Identifies the degenerate case",
+          "reasoning": "Explains pivot impact",
+          "application": "Describes practical mitigation"
+        }
       }
     ],
     "binary_search": [
       {
-        "id": "bs_1", "level": "definitional",
+        "id": "bs_1",
+        "level": "definitional",
         "text": "What are the preconditions for binary search, and what is its time complexity?",
-        "expected_points": ["sorted array", "O(log n)", "random access", "divide search space"],
-        "rubric": {"definition": "States sorted precondition", "reasoning": "Derives O(log n)", "application": "Mentions alternatives when unsorted"}
+        "expected_points": [
+          "sorted array",
+          "O(log n)",
+          "random access",
+          "divide search space"
+        ],
+        "rubric": {
+          "definition": "States sorted precondition",
+          "reasoning": "Derives O(log n)",
+          "application": "Mentions alternatives when unsorted"
+        }
       },
       {
-        "id": "bs_2", "level": "application",
+        "id": "bs_2",
+        "level": "application",
         "text": "How would you modify binary search to find the leftmost position of a target value in an array with duplicates?",
-        "expected_points": ["lo=mid+1 vs hi=mid", "post-loop check", "left biased condition", "off-by-one handling"],
-        "rubric": {"definition": "Describes the modification", "reasoning": "Explains why standard binary search fails", "application": "Handles edge cases"}
+        "expected_points": [
+          "lo=mid+1 vs hi=mid",
+          "post-loop check",
+          "left biased condition",
+          "off-by-one handling"
+        ],
+        "rubric": {
+          "definition": "Describes the modification",
+          "reasoning": "Explains why standard binary search fails",
+          "application": "Handles edge cases"
+        }
       }
     ],
     "recursion": [
       {
-        "id": "rec_1", "level": "definitional",
+        "id": "rec_1",
+        "level": "definitional",
         "text": "What are the two essential components of every recursive function?",
-        "expected_points": ["base case", "recursive case", "progress toward base case", "call stack"],
-        "rubric": {"definition": "Names base case and recursive case", "reasoning": "Explains why both are needed", "application": "Gives a concrete example"}
+        "expected_points": [
+          "base case",
+          "recursive case",
+          "progress toward base case",
+          "call stack"
+        ],
+        "rubric": {
+          "definition": "Names base case and recursive case",
+          "reasoning": "Explains why both are needed",
+          "application": "Gives a concrete example"
+        }
       },
       {
-        "id": "rec_2", "level": "application",
+        "id": "rec_2",
+        "level": "application",
         "text": "What is the time and space complexity of computing Fibonacci(n) using naive recursion? How does memoization change this?",
-        "expected_points": ["O(2^n) time naive", "O(n) call stack", "O(n) time with memo", "overlapping subproblems"],
-        "rubric": {"definition": "Correctly states naive complexity", "reasoning": "Explains exponential blowup", "application": "Describes memoization improvement"}
+        "expected_points": [
+          "O(2^n) time naive",
+          "O(n) call stack",
+          "O(n) time with memo",
+          "overlapping subproblems"
+        ],
+        "rubric": {
+          "definition": "Correctly states naive complexity",
+          "reasoning": "Explains exponential blowup",
+          "application": "Describes memoization improvement"
+        }
       }
     ],
     "hash_tables": [
       {
-        "id": "ht_1", "level": "definitional",
+        "id": "ht_1",
+        "level": "definitional",
         "text": "How does a hash table achieve O(1) average-case lookup? What causes worst-case O(n)?",
-        "expected_points": ["hash function maps key to index", "collision resolution", "all keys same bucket", "load factor"],
-        "rubric": {"definition": "Explains hash function role", "reasoning": "Describes collision impact", "application": "Mentions load factor and rehashing"}
+        "expected_points": [
+          "hash function maps key to index",
+          "collision resolution",
+          "all keys same bucket",
+          "load factor"
+        ],
+        "rubric": {
+          "definition": "Explains hash function role",
+          "reasoning": "Describes collision impact",
+          "application": "Mentions load factor and rehashing"
+        }
       },
       {
-        "id": "ht_2", "level": "application",
+        "id": "ht_2",
+        "level": "application",
         "text": "Describe two collision resolution strategies and their tradeoffs.",
-        "expected_points": ["chaining", "open addressing", "probe sequences", "memory usage difference"],
-        "rubric": {"definition": "Names two valid strategies", "reasoning": "Compares their tradeoffs", "application": "Identifies when each is preferred"}
+        "expected_points": [
+          "chaining",
+          "open addressing",
+          "probe sequences",
+          "memory usage difference"
+        ],
+        "rubric": {
+          "definition": "Names two valid strategies",
+          "reasoning": "Compares their tradeoffs",
+          "application": "Identifies when each is preferred"
+        }
       }
     ],
     "linked_lists": [
       {
-        "id": "ll_1", "level": "definitional",
+        "id": "ll_1",
+        "level": "definitional",
         "text": "Describe the structure of a singly linked list node and its time complexities for insert/delete/search.",
-        "expected_points": ["value and next pointer", "O(1) insert at head", "O(n) search", "O(1) delete with pointer to node"],
-        "rubric": {"definition": "Correctly describes node structure", "reasoning": "Gives correct complexities", "application": "Compares with array"}
+        "expected_points": [
+          "value and next pointer",
+          "O(1) insert at head",
+          "O(n) search",
+          "O(1) delete with pointer to node"
+        ],
+        "rubric": {
+          "definition": "Correctly describes node structure",
+          "reasoning": "Gives correct complexities",
+          "application": "Compares with array"
+        }
       },
       {
-        "id": "ll_2", "level": "application",
+        "id": "ll_2",
+        "level": "application",
         "text": "Explain Floyd's cycle detection algorithm. How does it work and what is its complexity?",
-        "expected_points": ["slow and fast pointer", "they meet inside cycle", "O(n) time", "O(1) space"],
-        "rubric": {"definition": "Describes two-pointer approach", "reasoning": "Explains why they must meet", "application": "States O(1) space advantage"}
+        "expected_points": [
+          "slow and fast pointer",
+          "they meet inside cycle",
+          "O(n) time",
+          "O(1) space"
+        ],
+        "rubric": {
+          "definition": "Describes two-pointer approach",
+          "reasoning": "Explains why they must meet",
+          "application": "States O(1) space advantage"
+        }
       }
     ],
     "trees": [
       {
-        "id": "tree_1", "level": "definitional",
+        "id": "tree_1",
+        "level": "definitional",
         "text": "What is the difference between the three DFS traversals of a binary tree?",
-        "expected_points": ["preorder: root left right", "inorder: left root right", "postorder: left right root", "inorder of BST gives sorted"],
-        "rubric": {"definition": "Correctly states all three orders", "reasoning": "Explains when each is useful", "application": "Notes inorder BST property"}
+        "expected_points": [
+          "preorder: root left right",
+          "inorder: left root right",
+          "postorder: left right root",
+          "inorder of BST gives sorted"
+        ],
+        "rubric": {
+          "definition": "Correctly states all three orders",
+          "reasoning": "Explains when each is useful",
+          "application": "Notes inorder BST property"
+        }
       },
       {
-        "id": "tree_2", "level": "application",
+        "id": "tree_2",
+        "level": "application",
         "text": "How would you find the lowest common ancestor (LCA) of two nodes in a binary tree?",
-        "expected_points": ["recursive postorder", "both nodes found below", "O(n) time", "path comparison approach"],
-        "rubric": {"definition": "Describes a valid approach", "reasoning": "Explains correctness", "application": "Discusses edge cases"}
+        "expected_points": [
+          "recursive postorder",
+          "both nodes found below",
+          "O(n) time",
+          "path comparison approach"
+        ],
+        "rubric": {
+          "definition": "Describes a valid approach",
+          "reasoning": "Explains correctness",
+          "application": "Discusses edge cases"
+        }
       }
     ],
     "graphs": [
       {
-        "id": "g_1", "level": "definitional",
+        "id": "g_1",
+        "level": "definitional",
         "text": "Compare adjacency list and adjacency matrix representations. When would you use each?",
-        "expected_points": ["O(V+E) vs O(V²) space", "O(1) edge lookup in matrix", "sparse vs dense", "iterating neighbors"],
-        "rubric": {"definition": "Describes both representations", "reasoning": "States complexity difference", "application": "Identifies use cases"}
+        "expected_points": [
+          "O(V+E) vs O(V²) space",
+          "O(1) edge lookup in matrix",
+          "sparse vs dense",
+          "iterating neighbors"
+        ],
+        "rubric": {
+          "definition": "Describes both representations",
+          "reasoning": "States complexity difference",
+          "application": "Identifies use cases"
+        }
       },
       {
-        "id": "g_2", "level": "application",
+        "id": "g_2",
+        "level": "application",
         "text": "Explain how BFS finds the shortest path in an unweighted graph. Why doesn't DFS guarantee this?",
-        "expected_points": ["level-by-level exploration", "first time node visited is shortest", "DFS may find longer path first", "queue vs stack"],
-        "rubric": {"definition": "Correctly describes BFS mechanics", "reasoning": "Explains why level order guarantees shortest", "application": "Contrasts with DFS correctly"}
+        "expected_points": [
+          "level-by-level exploration",
+          "first time node visited is shortest",
+          "DFS may find longer path first",
+          "queue vs stack"
+        ],
+        "rubric": {
+          "definition": "Correctly describes BFS mechanics",
+          "reasoning": "Explains why level order guarantees shortest",
+          "application": "Contrasts with DFS correctly"
+        }
       }
     ],
     "dynamic_programming_1d": [
       {
-        "id": "dp1_1", "level": "definitional",
+        "id": "dp1_1",
+        "level": "definitional",
         "text": "What are the two necessary conditions for a problem to be solvable with dynamic programming?",
-        "expected_points": ["overlapping subproblems", "optimal substructure", "top-down vs bottom-up", "state definition"],
-        "rubric": {"definition": "Names both conditions", "reasoning": "Explains why both are needed", "application": "Gives an example problem"}
+        "expected_points": [
+          "overlapping subproblems",
+          "optimal substructure",
+          "top-down vs bottom-up",
+          "state definition"
+        ],
+        "rubric": {
+          "definition": "Names both conditions",
+          "reasoning": "Explains why both are needed",
+          "application": "Gives an example problem"
+        }
       },
       {
-        "id": "dp1_2", "level": "application",
+        "id": "dp1_2",
+        "level": "application",
         "text": "Solve the coin change problem: given coins [1, 5, 10] and amount 18, find the minimum number of coins. Explain your DP state.",
-        "expected_points": ["dp[i] = min coins for amount i", "dp[0]=0", "transition: min over all coins", "answer is 4"],
-        "rubric": {"definition": "Defines state correctly", "reasoning": "Explains transition", "application": "Arrives at correct answer"}
+        "expected_points": [
+          "dp[i] = min coins for amount i",
+          "dp[0]=0",
+          "transition: min over all coins",
+          "answer is 4"
+        ],
+        "rubric": {
+          "definition": "Defines state correctly",
+          "reasoning": "Explains transition",
+          "application": "Arrives at correct answer"
+        }
       }
     ],
     "backtracking": [
       {
-        "id": "bt_1", "level": "definitional",
+        "id": "bt_1",
+        "level": "definitional",
         "text": "What distinguishes backtracking from brute-force enumeration? What is pruning?",
-        "expected_points": ["abandon partial solutions early", "constraint checking before recursion", "reduces search space", "branch and bound"],
-        "rubric": {"definition": "Explains early abandonment", "reasoning": "Describes when to prune", "application": "Gives a concrete example"}
+        "expected_points": [
+          "abandon partial solutions early",
+          "constraint checking before recursion",
+          "reduces search space",
+          "branch and bound"
+        ],
+        "rubric": {
+          "definition": "Explains early abandonment",
+          "reasoning": "Describes when to prune",
+          "application": "Gives a concrete example"
+        }
       }
     ],
     "heaps": [
       {
-        "id": "heap_1", "level": "definitional",
+        "id": "heap_1",
+        "level": "definitional",
         "text": "Describe the heap property and explain how heapify works.",
-        "expected_points": ["parent >= children (max-heap)", "O(log n) sift-down", "O(n) build heap", "complete binary tree"],
-        "rubric": {"definition": "States heap property", "reasoning": "Explains sift-down process", "application": "Notes O(n) build complexity"}
+        "expected_points": [
+          "parent >= children (max-heap)",
+          "O(log n) sift-down",
+          "O(n) build heap",
+          "complete binary tree"
+        ],
+        "rubric": {
+          "definition": "States heap property",
+          "reasoning": "Explains sift-down process",
+          "application": "Notes O(n) build complexity"
+        }
       }
     ]
   }
