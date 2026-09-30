@@ -50,8 +50,8 @@ class CurriculumKG:
         """All prerequisites are treated as hard prerequisites in DSA."""
         return self.prerequisites(cid)
 
-    def ancestors(self, cid: str) -> Set[str]:
-        """All transitive prerequisite ancestors of a concept."""
+    def ancestors(self, cid: str) -> List[str]:
+        """All transitive prerequisite ancestors of a concept in topological order."""
         result, stack = set(), list(self.prerequisites(cid))
         while stack:
             p = stack.pop()
@@ -59,15 +59,15 @@ class CurriculumKG:
                 continue
             result.add(p)
             stack.extend(self.prerequisites(p))
-        return result
+        return [c for c in self._topo_order if c in result]
 
-    def descendants(self, cid: str) -> Set[str]:
-        """All concepts that directly or transitively depend on cid."""
+    def descendants(self, cid: str) -> List[str]:
+        """All concepts that directly or transitively depend on cid in topological order."""
         result = set()
         for other in self.concepts:
             if cid in self.ancestors(other):
                 result.add(other)
-        return result
+        return [c for c in self._topo_order if c in result]
 
     def canonical_roadmap(self) -> List[Dict]:
         return [

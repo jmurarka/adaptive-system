@@ -3,7 +3,7 @@ Component 4: Dynamic Roadmap Replanner
 Operators: reinsertion, compression, deferral.
 All plans are validated against prerequisite constraints.
 """
-from typing import List, Dict, Optional
+from typing import List, Dict, Optional, Set
 from core.kg import CurriculumKG
 from core.learner import LearnerState, MasteryLevel
 from core.reasoner import PlanAwareReasoner, ReasonerResult
@@ -46,36 +46,30 @@ class DynamicReplanner:
         analysis = self.reasoner.analyse(learner, canonical_idx)
         steps: List[RoadmapStep] = []
         applied_ops: List[str] = []
+        seen: Set[str] = set()
 
         # ① Reinsertion — forgotten or newly weak concepts
         for event in analysis.forgetting_events:
             cid = event["concept_id"]
-            if self._prereqs_ok(cid, learner, steps):
-                steps.append(RoadmapStep(
-                    cid, self.kg.get(cid)["name"],
-                    "reinforce",
-                    f"Forgetting detected — reinserting for spaced review",
-                    priority=0,
-                ))
+            self._add_with_prereqs(
+                cid, "reinforce", "Forgetting detected — reinserting for spaced review",
+                priority=0, learner=learner, steps=steps, seen=seen
+            )
+            if cid in seen:
                 applied_ops.append(f"REINSERTION({cid})")
 
         # ② Root-cause remediation — weak prerequisites
-        seen = {s.concept_id for s in steps}
         for weak_cid, weak_prereqs in analysis.weak_root_causes.items():
             for p in weak_prereqs:
-                if p not in seen and self._prereqs_ok(p, learner, steps):
-                    steps.append(RoadmapStep(
-                        p, self.kg.get(p)["name"],
-                        "review",
-                        f"Root cause of weakness in '{self.kg.get(weak_cid)['name']}'",
-                        priority=1,
-                    ))
-                    seen.add(p)
+                self._add_with_prereqs(
+                    p, "review", f"Root cause of weakness in '{self.kg.get(weak_cid)['name']}'",
+                    priority=1, learner=learner, steps=steps, seen=seen
+                )
+                if p in seen:
                     applied_ops.append(f"REMEDIATION({p})")
 
         # ③ Normal forward learning — next unmastered concepts
         roadmap_order = self.kg.all_concept_ids()
-        seen = {s.concept_id for s in steps}
 
         for cid in roadmap_order:
             if len(steps) >= self.MAX_STEPS:
@@ -86,31 +80,13 @@ class DynamicReplanner:
             if level == MasteryLevel.STRONG:
                 continue
 
-            # Check prerequisite constraint (hard rule)
-            ok, unmet = self.reasoner.prerequisites_met(cid, learner)
-            if not ok:
-                # Add unmet prereqs first if not already present
-                for u in unmet:
-                    if u not in seen and len(steps) < self.MAX_STEPS:
-                        u_ok, _ = self.reasoner.prerequisites_met(u, learner)
-                        if u_ok:
-                            steps.append(RoadmapStep(
-                                u, self.kg.get(u)["name"],
-                                "learn" if learner.mastery_level(u) == MasteryLevel.UNKNOWN else "review",
-                                f"Prerequisite for '{self.kg.get(cid)['name']}'",
-                                priority=2,
-                            ))
-                            seen.add(u)
-                continue
-
             action = "review" if level == MasteryLevel.PARTIAL else "learn"
-            steps.append(RoadmapStep(
-                cid, self.kg.get(cid)["name"], action,
-                "Next concept in curriculum" if action == "learn"
-                else "Partial mastery — needs reinforcement",
-                priority=3,
-            ))
-            seen.add(cid)
+            reason = ("Next concept in curriculum" if action == "learn"
+                      else "Partial mastery — needs reinforcement")
+            self._add_with_prereqs(
+                cid, action, reason, priority=3,
+                learner=learner, steps=steps, seen=seen
+            )
 
         # ④ Compression — if learner is accelerating (deviation < -1)
         if analysis.deviation < -1:
@@ -126,11 +102,41 @@ class DynamicReplanner:
 
     # ── helpers ────────────────────────────────────────────────────────────
 
+    def _add_with_prereqs(self, cid: str, action: str, reason: str, priority: int,
+                          learner: LearnerState, steps: List[RoadmapStep], seen: Set[str]):
+        """
+        Recursively ensures all unmastered/unknown prerequisite ancestors of cid
+        are added to steps in topological order BEFORE adding cid.
+        """
+        # Find all ancestors of cid in topological order
+        ancestors_topo = [a for a in self.kg.all_concept_ids() if a in self.kg.ancestors(cid)]
+        for a in ancestors_topo:
+            if len(steps) >= self.MAX_STEPS:
+                break
+            if a not in seen and learner.mastery_level(a) not in (MasteryLevel.STRONG, MasteryLevel.PARTIAL):
+                a_name = (self.kg.get(a) or {}).get("name", a)
+                target_name = (self.kg.get(cid) or {}).get("name", cid)
+                steps.append(RoadmapStep(
+                    a, a_name,
+                    "learn" if learner.mastery_level(a) == MasteryLevel.UNKNOWN else "review",
+                    f"Prerequisite for '{target_name}'",
+                    priority=priority
+                ))
+                seen.add(a)
+
+        # Add cid itself if all prerequisite ancestors are satisfied (in learner or in steps)
+        if self._prereqs_ok(cid, learner, steps) and cid not in seen and len(steps) < self.MAX_STEPS:
+            cid_name = (self.kg.get(cid) or {}).get("name", cid)
+            steps.append(RoadmapStep(
+                cid, cid_name, action, reason, priority=priority
+            ))
+            seen.add(cid)
+
     def _prereqs_ok(self, cid: str, learner: LearnerState,
                     planned: List[RoadmapStep]) -> bool:
-        """Check hard prerequisites against current mastery + already planned steps."""
+        """Check hard prerequisites (all transitive ancestors) against current mastery + already planned steps."""
         planned_ids = {s.concept_id for s in planned}
-        for p in self.kg.hard_prerequisites(cid):
+        for p in self.kg.ancestors(cid):
             level = learner.mastery_level(p)
             if level == MasteryLevel.UNKNOWN and p not in planned_ids:
                 return False

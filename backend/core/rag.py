@@ -4,6 +4,7 @@ Grounds all explanations in the KG + Evidence Log (ChromaDB).
 Prevents hallucination by restricting generation to retrieved evidence.
 """
 import os
+import time
 import json
 from typing import List, Dict, Optional
 from pathlib import Path
@@ -35,7 +36,7 @@ class RAGExplainer:
         self.kg = kg
         self.use_mock = use_mock
         self._llm_ok = False
-        self.model_name = "gemini-pro"  # Use gemini-pro which is stable
+        self.model_name = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
 
         # Set up Gemini
         api_key = os.getenv("GEMINI_API_KEY")
@@ -76,14 +77,19 @@ Rules:
 - Be constructive and specific.
 - Do NOT invent facts not present in the evidence."""
 
-        try:
-            return self.client.models.generate_content(
-                model=self.model_name,
-                contents=prompt,
-                config={"temperature": 0.4, "max_output_tokens": 500},
-            ).text.strip()
-        except Exception:
-            return self._template_explanation(concept, action, reason, mastery_score)
+        for attempt in range(4):
+            try:
+                return self.client.models.generate_content(
+                    model=self.model_name,
+                    contents=prompt,
+                    config={"temperature": 0.4, "max_output_tokens": 500},
+                ).text.strip()
+            except Exception as e:
+                if "RESOURCE_EXHAUSTED" in str(e) or "429" in str(e):
+                    time.sleep(1)
+                    continue
+                return self._template_explanation(concept, action, reason, mastery_score)
+        return self._template_explanation(concept, action, reason, mastery_score)
 
     def explain_weak_concept(self, concept_id: str,
                              weak_prereqs: List[str]) -> str:

@@ -83,6 +83,58 @@
         }
       }
     ],
+    "strings": [
+      {
+        "id": "str_1",
+        "level": "definitional",
+        "text": "What is a string and why are strings immutable in languages like Python and Java?",
+        "expected_points": [
+          "sequence of characters",
+          "immutability prevents side effects",
+          "string pooling and hashing security",
+          "thread safety"
+        ],
+        "rubric": {
+          "definition": "Defines string as sequence of characters",
+          "reasoning": "Explains immutability benefits like thread safety and hash stability",
+          "application": "Notes how new string creation works"
+        }
+      }
+    ],
+    "hash_tables": [
+      {
+        "id": "ht_1",
+        "level": "definitional",
+        "text": "How does a hash table achieve O(1) average-case lookup? What causes worst-case O(n)?",
+        "expected_points": [
+          "hash function maps key to index",
+          "collision resolution",
+          "all keys same bucket",
+          "load factor"
+        ],
+        "rubric": {
+          "definition": "Explains hash function role",
+          "reasoning": "Describes collision impact",
+          "application": "Mentions load factor and rehashing"
+        }
+      },
+      {
+        "id": "ht_2",
+        "level": "application",
+        "text": "Describe two collision resolution strategies and their tradeoffs.",
+        "expected_points": [
+          "chaining",
+          "open addressing",
+          "probe sequences",
+          "memory usage difference"
+        ],
+        "rubric": {
+          "definition": "Names two valid strategies",
+          "reasoning": "Compares their tradeoffs",
+          "application": "Identifies when each is preferred"
+        }
+      }
+    ],
     "sorting": [
       {
         "id": "sort_1",
@@ -202,40 +254,6 @@
         }
       }
     ],
-    "hash_tables": [
-      {
-        "id": "ht_1",
-        "level": "definitional",
-        "text": "How does a hash table achieve O(1) average-case lookup? What causes worst-case O(n)?",
-        "expected_points": [
-          "hash function maps key to index",
-          "collision resolution",
-          "all keys same bucket",
-          "load factor"
-        ],
-        "rubric": {
-          "definition": "Explains hash function role",
-          "reasoning": "Describes collision impact",
-          "application": "Mentions load factor and rehashing"
-        }
-      },
-      {
-        "id": "ht_2",
-        "level": "application",
-        "text": "Describe two collision resolution strategies and their tradeoffs.",
-        "expected_points": [
-          "chaining",
-          "open addressing",
-          "probe sequences",
-          "memory usage difference"
-        ],
-        "rubric": {
-          "definition": "Names two valid strategies",
-          "reasoning": "Compares their tradeoffs",
-          "application": "Identifies when each is preferred"
-        }
-      }
-    ],
     "linked_lists": [
       {
         "id": "ll_1",
@@ -267,6 +285,24 @@
           "definition": "Describes two-pointer approach",
           "reasoning": "Explains why they must meet",
           "application": "States O(1) space advantage"
+        }
+      }
+    ],
+    "stacks_queues": [
+      {
+        "id": "sq_1",
+        "level": "definitional",
+        "text": "What is the difference between LIFO and FIFO ordering in Stacks vs Queues?",
+        "expected_points": [
+          "stack is LIFO push pop",
+          "queue is FIFO enqueue dequeue",
+          "O(1) operations for both",
+          "applications in call stack and BFS"
+        ],
+        "rubric": {
+          "definition": "Defines LIFO and FIFO correctly",
+          "reasoning": "Explains stack and queue operations",
+          "application": "Names typical usage scenarios"
         }
       }
     ],
@@ -304,6 +340,60 @@
         }
       }
     ],
+    "bst": [
+      {
+        "id": "bst_1",
+        "level": "definitional",
+        "text": "What is the Binary Search Tree (BST) property and what are its search time complexities?",
+        "expected_points": [
+          "left child < root < right child",
+          "O(log n) average search time",
+          "O(n) worst case skewed tree",
+          "balanced BST tree height"
+        ],
+        "rubric": {
+          "definition": "States BST left < root < right ordering property",
+          "reasoning": "Explains average O(log n) vs worst case O(n)",
+          "application": "Mentions balancing like AVL or Red-Black trees"
+        }
+      }
+    ],
+    "heaps": [
+      {
+        "id": "heap_1",
+        "level": "definitional",
+        "text": "Describe the heap property and explain how heapify works.",
+        "expected_points": [
+          "parent >= children (max-heap)",
+          "O(log n) sift-down",
+          "O(n) build heap",
+          "complete binary tree"
+        ],
+        "rubric": {
+          "definition": "States heap property",
+          "reasoning": "Explains sift-down process",
+          "application": "Notes O(n) build complexity"
+        }
+      }
+    ],
+    "tries": [
+      {
+        "id": "trie_1",
+        "level": "definitional",
+        "text": "What is a Trie data structure and why is it preferred for prefix matching?",
+        "expected_points": [
+          "tree of characters",
+          "O(L) time where L is word length",
+          "shared prefix memory",
+          "autocomplete applications"
+        ],
+        "rubric": {
+          "definition": "Describes Trie node structure and character edges",
+          "reasoning": "Explains why lookup depends on key length L, not total words N",
+          "application": "Gives autocomplete or dictionary lookup example"
+        }
+      }
+    ],
     "graphs": [
       {
         "id": "g_1",
@@ -335,6 +425,24 @@
           "definition": "Correctly describes BFS mechanics",
           "reasoning": "Explains why level order guarantees shortest",
           "application": "Contrasts with DFS correctly"
+        }
+      }
+    ],
+    "backtracking": [
+      {
+        "id": "bt_1",
+        "level": "definitional",
+        "text": "What distinguishes backtracking from brute-force enumeration? What is pruning?",
+        "expected_points": [
+          "abandon partial solutions early",
+          "constraint checking before recursion",
+          "reduces search space",
+          "branch and bound"
+        ],
+        "rubric": {
+          "definition": "Explains early abandonment",
+          "reasoning": "Describes when to prune",
+          "application": "Gives a concrete example"
         }
       }
     ],
@@ -372,39 +480,75 @@
         }
       }
     ],
-    "backtracking": [
+    "dynamic_programming_2d": [
       {
-        "id": "bt_1",
+        "id": "dp2_1",
         "level": "definitional",
-        "text": "What distinguishes backtracking from brute-force enumeration? What is pruning?",
+        "text": "How do 2D dynamic programming tables represent state transitions in grid or multi-sequence problems like Longest Common Subsequence?",
         "expected_points": [
-          "abandon partial solutions early",
-          "constraint checking before recursion",
-          "reduces search space",
-          "branch and bound"
+          "2D state table dp[i][j]",
+          "character match vs mismatch transitions",
+          "optimal substructure in 2D",
+          "space optimization using 1D rows"
         ],
         "rubric": {
-          "definition": "Explains early abandonment",
-          "reasoning": "Describes when to prune",
-          "application": "Gives a concrete example"
+          "definition": "Defines 2D state table indexing",
+          "reasoning": "Explains transition equation based on subproblems",
+          "application": "Notes space optimization strategies"
         }
       }
     ],
-    "heaps": [
+    "graph_algorithms": [
       {
-        "id": "heap_1",
+        "id": "ga_1",
         "level": "definitional",
-        "text": "Describe the heap property and explain how heapify works.",
+        "text": "Explain Dijkstra's algorithm for Single-Source Shortest Path. What condition must be met for edge weights?",
         "expected_points": [
-          "parent >= children (max-heap)",
-          "O(log n) sift-down",
-          "O(n) build heap",
-          "complete binary tree"
+          "non-negative edge weights required",
+          "priority queue min-heap",
+          "greedy selection of shortest distance node",
+          "O((V+E) log V) complexity"
         ],
         "rubric": {
-          "definition": "States heap property",
-          "reasoning": "Explains sift-down process",
-          "application": "Notes O(n) build complexity"
+          "definition": "Defines Dijkstra greedy approach",
+          "reasoning": "Explains non-negative weight restriction",
+          "application": "States time complexity with priority queue"
+        }
+      }
+    ],
+    "sliding_window": [
+      {
+        "id": "sw_1",
+        "level": "definitional",
+        "text": "What is the sliding window technique and how does it reduce time complexity from O(n²) to O(n)?",
+        "expected_points": [
+          "left and right pointers",
+          "incremental window state update",
+          "avoids recomputing sum or frequency",
+          "O(n) single pass time"
+        ],
+        "rubric": {
+          "definition": "Defines sliding window two-pointer bounds",
+          "reasoning": "Explains why incremental updates avoid redundant work",
+          "application": "Gives max subarray or substring example"
+        }
+      }
+    ],
+    "bit_manipulation": [
+      {
+        "id": "bm_1",
+        "level": "definitional",
+        "text": "Explain the key bitwise operators (AND, OR, XOR, shifts) and how XOR can find a single non-repeating number in an array.",
+        "expected_points": [
+          "XOR of identical numbers is zero (x ^ x = 0)",
+          "XOR with zero is original number (x ^ 0 = x)",
+          "bitwise AND for masking",
+          "O(n) time and O(1) space"
+        ],
+        "rubric": {
+          "definition": "Defines bitwise operators",
+          "reasoning": "Explains XOR properties for cancelation",
+          "application": "Describes O(1) space single number solution"
         }
       }
     ]

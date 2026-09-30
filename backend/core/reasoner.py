@@ -97,7 +97,7 @@ class PlanAwareReasoner:
         for cid in self.kg.all_concept_ids():
             if learner.mastery_level(cid) == MasteryLevel.WEAK:
                 weak_prereqs = [
-                    p for p in self.kg.prerequisites(cid)
+                    p for p in self.kg.ancestors(cid)
                     if learner.mastery_level(p) in (MasteryLevel.WEAK, MasteryLevel.UNKNOWN)
                 ]
                 if weak_prereqs:

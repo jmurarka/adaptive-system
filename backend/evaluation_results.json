@@ -1,0 +1,195 @@
+{
+  "timestamp": "2026-09-29T20:06:48Z",
+  "experiment_1_mastery_inference": {
+    "mae": {
+      "mean": 0.0787,
+      "std": 0.0115,
+      "ci_low": 0.0736,
+      "ci_high": 0.0838,
+      "formatted": "0.0787 +/- 0.0115 (95% CI: [0.0736, 0.0838])"
+    },
+    "baseline_mae_constant_guess": 0.1846,
+    "spearman_rho": {
+      "mean": 0.8591,
+      "std": 0.0368,
+      "ci_low": 0.8433,
+      "ci_high": 0.8741,
+      "formatted": "0.8591 +/- 0.0368 (95% CI: [0.8433, 0.8741])"
+    },
+    "pearson_r": {
+      "mean": 0.9031,
+      "std": 0.029,
+      "ci_low": 0.8907,
+      "ci_high": 0.9148,
+      "formatted": "0.9031 +/- 0.0290 (95% CI: [0.8907, 0.9148])"
+    },
+    "n_learners": 20,
+    "concepts_per_learner": 20,
+    "total_evaluations_count": 400,
+    "llm_engine_used": "gemini-2.5-flash"
+  },
+  "experiment_2_forgetting_detection": {
+    "primary_model": {
+      "alpha": 0.65,
+      "precision": 0.4792,
+      "recall": 1.0,
+      "f1_score": 0.6479,
+      "false_positive_rate": 0.46,
+      "detection_delay_days": 2.04
+    },
+    "optimal_f1_model": {
+      "alpha": 0.9,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1_score": 1.0,
+      "false_positive_rate": 0.0,
+      "detection_delay_days": 6.24
+    },
+    "naive_baseline": {
+      "alpha": 0.0,
+      "precision": 0.0733,
+      "recall": 1.0,
+      "f1_score": 0.1366,
+      "false_positive_rate": 1.0,
+      "detection_delay_days": 1.0
+    },
+    "decay_cohort_n": 50,
+    "stable_cohort_n": 100,
+    "sensitivity_table": {
+      "alpha_0.1": {
+        "alpha": 0.1,
+        "precision": 0.1409,
+        "recall": 1.0,
+        "f1_score": 0.2471,
+        "false_positive_rate": 0.99,
+        "detection_delay_days": 0.43
+      },
+      "alpha_0.25": {
+        "alpha": 0.25,
+        "precision": 0.1141,
+        "recall": 1.0,
+        "f1_score": 0.2048,
+        "false_positive_rate": 0.99,
+        "detection_delay_days": 0.94
+      },
+      "alpha_0.35": {
+        "alpha": 0.35,
+        "precision": 0.125,
+        "recall": 1.0,
+        "f1_score": 0.2222,
+        "false_positive_rate": 0.94,
+        "detection_delay_days": 1.11
+      },
+      "alpha_0.5": {
+        "alpha": 0.5,
+        "precision": 0.237,
+        "recall": 1.0,
+        "f1_score": 0.3832,
+        "false_positive_rate": 0.85,
+        "detection_delay_days": 1.53
+      },
+      "alpha_0.65": {
+        "alpha": 0.65,
+        "precision": 0.4792,
+        "recall": 1.0,
+        "f1_score": 0.6479,
+        "false_positive_rate": 0.46,
+        "detection_delay_days": 2.04
+      },
+      "alpha_0.8": {
+        "alpha": 0.8,
+        "precision": 0.8393,
+        "recall": 1.0,
+        "f1_score": 0.9126,
+        "false_positive_rate": 0.06,
+        "detection_delay_days": 3.21
+      },
+      "alpha_0.9": {
+        "alpha": 0.9,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0,
+        "false_positive_rate": 0.0,
+        "detection_delay_days": 6.24
+      }
+    }
+  },
+  "experiment_3_root_cause_recovery": {
+    "proposed_backprop": {
+      "hit_rate_top1_pct": 100.0,
+      "mrr": 1.0,
+      "hits": 50,
+      "total_trials": 50
+    },
+    "direct_prereq_baseline": {
+      "hit_rate_top1_pct": 0.0,
+      "mrr": 0.0,
+      "hits": 0,
+      "total_trials": 50
+    },
+    "lowest_mastery_ancestor": {
+      "hit_rate_top1_pct": 0.0,
+      "mrr": 0.0,
+      "hits": 0,
+      "total_trials": 50
+    },
+    "target_only_baseline": {
+      "hit_rate_top1_pct": 0.0,
+      "mrr": 0.0,
+      "hits": 0,
+      "total_trials": 50
+    }
+  },
+  "experiment_4_roadmap_validity": {
+    "n_learners_tested": 500,
+    "valid_roadmaps_pct": 100.0,
+    "total_violations": 0,
+    "avg_roadmap_length_steps": 8.0,
+    "negative_control_shuffled_detection_rate_pct": 86.4
+  },
+  "experiment_5_latency_benchmark": {
+    "non_llm_pipeline": {
+      "median_p50_ms": 0.236,
+      "p95_ms": 0.479,
+      "mean_ms": 0.274,
+      "std_ms": 0.112,
+      "min_ms": 0.166,
+      "max_ms": 1.242,
+      "runs_count": 1000
+    },
+    "real_gemini_llm_api": {
+      "median_p50_ms": 2891.12,
+      "p95_ms": 3145.15,
+      "mean_ms": 2924.7,
+      "std_ms": 182.4,
+      "model": "gemini-2.5-flash",
+      "runs_count": 20,
+      "operational_backoff_tail_ms": 27433.27
+    }
+  },
+  "experiment_6_rag_groundedness": {
+    "rag_explainer_groundedness": {
+      "mean": 0.7,
+      "std": 0.2449,
+      "ci_low": 0.55,
+      "ci_high": 0.85,
+      "formatted": "0.7000 +/- 0.2449 (95% CI: [0.5500, 0.8500])"
+    },
+    "no_retrieval_baseline": {
+      "mean": 0.0,
+      "std": 0.0,
+      "ci_low": 0.0,
+      "ci_high": 0.0,
+      "formatted": "0.0000 +/- 0.0000 (95% CI: [0.0000, 0.0000])"
+    },
+    "n_samples": 10,
+    "llm_model": "gemini-2.5-flash",
+    "scoring_rubric": "2-criteria claim-level evidence verification (0.5 for entity match, 0.5 for evidence terminology match from retrieved KG description)"
+  },
+  "deprecated_metrics_justification": {
+    "Entropy": "Learner mastery is tracked as a continuous scalar moving average S_t in [0, 1], not a discrete multi-class probability distribution. Shannon entropy requires discrete probability distributions.",
+    "MRR (Mean Reciprocal Rank)": "MRR evaluates single item search ranking. Curriculum replanning optimizes sequential 8-step prerequisite trajectories, not single-item search lookup.",
+    "Hit@3 Rate": "Hit@3 measures unordered top-3 item relevance. Curriculum planning is strictly governed by DAG topological constraints, making unordered top-K hit rates mathematically unsuited.",
+    "KST_and_ALEKS_Clarification": "Knowledge Space Theory (KST; Doignon & Falmagne) models feasible learning states bounded by prerequisite relations. ALEKS is a commercial software platform implementing KST. Our system incorporates KST principles for prerequisite graph reasoning but does NOT use ALEKS software."
+  }
+}

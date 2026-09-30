@@ -3,6 +3,7 @@ Component 2: Interview-Driven Mastery Inference Module
 Uses Gemini to evaluate open-ended answers and map them to discrete mastery states.
 """
 import os
+import time
 import json
 import re
 from pathlib import Path
@@ -19,7 +20,7 @@ class InterviewEngine:
     def __init__(self, use_mock: bool = False):
         self.use_mock = use_mock
         self._load_questions()
-        self.model_name = "gemini-pro"  # Use gemini-pro which is stable
+        self.model_name = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
 
         if not use_mock:
             api_key = os.getenv("GEMINI_API_KEY")
@@ -76,6 +77,7 @@ class InterviewEngine:
             "composite_score": composite,
             "mastery_signal": mastery_signal,
             "feedback": feedback,
+            "api_latency_ms": getattr(self, "_last_api_latency_ms", None),
         }
 
     def evaluate_session(self, concept_id: str,
@@ -224,22 +226,37 @@ STUDENT ANSWER: {answer}
 Score each rubric dimension 0.0–1.0. Reply ONLY with this JSON (no preamble):
 {{"definition": <float>, "reasoning": <float>, "application": <float>}}"""
 
-        try:
-            resp = self.client.models.generate_content(
-                model=self.model_name,
-                contents=prompt,
-                config={"temperature": 0.3, "max_output_tokens": 400},
-            )
-            text = resp.text.strip()
-            m = re.search(r"\{[^}]+\}", text, re.DOTALL)
-            raw = json.loads(m.group() if m else text)
-            return {
-                dim: max(0.0, min(1.0, float(raw.get(dim, 0.5))))
-                for dim in ("definition", "reasoning", "application")
-            }
-        except Exception as e:
-            print(f"Gemini error: {e}")
-            return self._mock_score(answer)
+        for attempt in range(4):
+            try:
+                t0_call = time.perf_counter()
+                resp = self.client.models.generate_content(
+                    model=self.model_name,
+                    contents=prompt,
+                    config={"temperature": 0.2, "max_output_tokens": 300},
+                )
+                t1_call = time.perf_counter()
+                self._last_api_latency_ms = round((t1_call - t0_call) * 1000.0, 2)
+                text = resp.text.strip()
+                text = re.sub(r"^```(?:json)?\s*", "", text, flags=re.IGNORECASE)
+                text = re.sub(r"\s*```$", "", text)
+                m = re.search(r"\{[^{}]*\"definition\"[^{}]*\}", text, re.DOTALL) or re.search(r"\{[^{}]*\}", text, re.DOTALL)
+                json_str = m.group() if m else text
+                raw = json.loads(json_str)
+                return {
+                    dim: max(0.0, min(1.0, float(raw.get(dim, 0.5))))
+                    for dim in ("definition", "reasoning", "application")
+                }
+            except Exception as e:
+                err_str = str(e)
+                if attempt < 3 and ("RESOURCE_EXHAUSTED" in err_str or "429" in err_str):
+                    time.sleep(8.5)
+                    continue
+                if attempt < 3 and ("getaddrinfo" in err_str or "disconnected" in err_str or "connection" in err_str.lower()):
+                    time.sleep(2.0)
+                    continue
+                print(f"Gemini evaluation error (attempt {attempt+1}): {e}")
+        self._last_api_latency_ms = None
+        return self._mock_score(answer)
 
     def _mock_score(self, answer: str) -> Dict[str, float]:
         import random
