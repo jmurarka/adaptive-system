@@ -1,4 +1,4 @@
-# 🎓 Athena: Grounded Architecture & Evaluation for Knowledge-Graph-Grounded Adaptive Learning Systems
+# Athena: Grounded Architecture & Evaluation for Knowledge-Graph-Grounded Adaptive Learning Systems
 
 [![Python 3.12](https://img.shields.io/badge/Python-3.12-blue.svg)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.110+-009688.svg)](https://fastapi.tiangolo.com/)
@@ -7,13 +7,12 @@
 [![Gemini API](https://img.shields.io/badge/LLM-Gemini_2.5_Flash-8E75B2.svg)](https://deepmind.google/technologies/gemini/)
 [![Constraint Validity](https://img.shields.io/badge/Prerequisite_Validity-100%25-brightgreen.svg)]()
 [![Root-Cause Recovery](https://img.shields.io/badge/Root--Cause_MRR-1.0000-brightgreen.svg)]()
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 > Official implementation and empirical evaluation repository for the research paper: **"Grounded Evaluation and Architecture Revision for Knowledge-Graph-Grounded Adaptive Learning Systems"**.
 
 ---
 
-## 📌 Executive Summary
+## Executive Summary
 
 **Athena** is a graph-grounded, interview-aware adaptive learning framework that unifies structured knowledge representations with open-ended conversational evaluation. Rather than relying on ungrounded heuristic roadmaps or unconstrained LLM planning, Athena establishes strict topological prerequisite boundaries over a **Curriculum Knowledge Graph (KG)** and continuously adapts student roadmaps via a **Plan-Aware KG Reasoner** and **Dynamic Roadmap Replanner**.
 
@@ -24,7 +23,7 @@ Empirical benchmarks across $N=500$ property-tested simulated learners demonstra
 
 ---
 
-## 🏗 System Architecture (The Five-Component Standard)
+## System Architecture (The Five-Component Standard)
 
 Athena is strictly structured around five decoupled, non-overlapping architectural components:
 
@@ -55,7 +54,7 @@ Athena is strictly structured around five decoupled, non-overlapping architectur
 
 ---
 
-## 📊 Key Empirical Benchmarks
+## Key Empirical Benchmarks
 
 All evaluation metrics are programmatically generated using fixed random seeds (`seed=42`) and percentile bootstrap confidence intervals (1,000 resamples). Full execution results are saved in [`backend/evaluation_results.json`](file:///c:/Users/jhanv/Desktop/athena-main/backend/evaluation_results.json).
 
@@ -98,7 +97,7 @@ Evaluated across 5 structural DAG topology scenarios repeated 10 times under ran
 
 ---
 
-## 📁 Repository Layout
+## Repository Layout
 
 ```
 athena-main/
@@ -133,7 +132,7 @@ athena-main/
 
 ---
 
-## ⚡ Quick Start & Reproduction
+## Quick Start & Reproduction
 
 ### Prerequisites
 - **Python**: `3.12+`
@@ -142,7 +141,7 @@ athena-main/
 
 ---
 
-### 1️⃣ Backend Setup & Server Execution
+### Backend Setup & Server Execution
 
 ```bash
 cd backend
@@ -164,7 +163,7 @@ python main.py
 
 ---
 
-### 2️⃣ Frontend Setup & UI Execution
+### Frontend Setup & UI Execution
 
 ```bash
 cd frontend
@@ -175,7 +174,7 @@ npm run dev
 
 ---
 
-### 3️⃣ Running the Research Benchmark Suite
+### Running the Research Benchmark Suite
 
 To execute the empirical evaluation suite and programmatically re-generate `evaluation_results.json`:
 
@@ -192,7 +191,7 @@ python generate_paper_tables.py
 
 ---
 
-## 🔌 API Endpoint Reference
+## API Endpoint Reference
 
 | Method | Path | Description |
 | :--- | :--- | :--- |
@@ -210,21 +209,4 @@ python generate_paper_tables.py
 
 ---
 
-## 📖 Citation
 
-If you use Athena or reference our benchmarks in your research, please cite our work:
-
-```bibtex
-@article{athena2026grounded,
-  title={Grounded Evaluation and Architecture Revision for Knowledge-Graph-Grounded Adaptive Learning Systems},
-  author={Das, Soumashree and Murarka, J.},
-  journal={arXiv preprint},
-  year={2026}
-}
-```
-
----
-
-## 📜 License
-
-This project is licensed under the [MIT License](LICENSE).
